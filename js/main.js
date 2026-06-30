@@ -1,11 +1,17 @@
-const header = document.querySelector('header');
+const header = document.getElementById('header');
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('main-nav');
+
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 20);
-});
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('nav');
+  header.classList.toggle('shadow', window.scrollY > 8);
+}, { passive: true });
+
 hamburger?.addEventListener('click', () => {
-  nav.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', nav.classList.contains('open'));
+  const open = nav.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
 });
-document.querySelectorAll('nav a').forEach(l => l.addEventListener('click', () => nav.classList.remove('open')));
+
+nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  hamburger?.setAttribute('aria-expanded', 'false');
+}));
